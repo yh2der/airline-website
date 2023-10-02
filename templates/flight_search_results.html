@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flight List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: rgb(229, 214, 175);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: rgb(226, 169, 35);
+            width: 150px;
+        }
+
+        tr {
+            background-color: rgb(253, 249, 240);
+        }
+
+        tr:hover {
+            background-color: rgb(234, 191, 91);
+            cursor: pointer;
+        }
+
+        .logout {
+            text-align: right;
+            margin-top: 20px;
+        }
+
+        .logout a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #f44336;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .logout a:hover {
+            background-color: #d32f2f;
+        }
+
+        .search {
+            margin-bottom: 30px;
+        }
+
+        .search label, .search input[type="date"], .search input[type="text"], .search button {
+            margin-right: 20px;
+            width: 200px;
+        }
+
+        .search input[type="text"] {
+            width: 200px;
+        }
+
+        .search button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .search button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome, {{ username }}!</h1>
+    <div class="logout">
+        <a href="/logout">Logout</a>
+    </div>
+    <div class="search">
+        <form id="flightSearchForm" action="/flight/search_flights" method="POST">
+            <label for="departureTime">Departure Time:</label>
+            <input type="date" id="departureTime" name="departureTime">
+
+            <label for="departure">Departure Location:</label>
+            <input type="text" id="departure" name="departure">
+
+            <label for="arrivalTime">Arrival Time:</label>
+            <input type="date" id="arrivalTime" name="arrivalTime">
+
+            <label for="destination">Arrival Location:</label>
+            <input type="text" id="destination" name="destination">
+
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    <h2>Flight List</h2>
+    <table>
+        <tr>
+            <th>Flight ID</th>
+            <th>Flight Name</th>
+            <th>Departure Airport</th>
+            <th>Arrival Airport</th>
+            <th>Departure Time</th>
+            <th>Arrival Time</th>
+            <th>Amount</th>
+        </tr>
+        {% for flight in flights %}
+            <tr onclick="location.href='/flight/{{ flight.fId }}';">
+                <td>{{ flight.fId }}</td>
+                <td>{{ flight.fName }}</td>
+                <td>{{ flight.dAirport }}</td>
+                <td>{{ flight.aAirport }}</td>
+                <td>{{ flight.dTime }}</td>
+                <td>{{ flight.aTime }}</td>
+                <td>{{ flight.amount }}</td>
+            </tr>
+        {% endfor %}
+    </table>    
+</body>
+</html>

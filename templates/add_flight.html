@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add Flight</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: rgb(229, 214, 175);
+        }
+
+        .container {
+            width: 400px;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="datetime-local"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            margin: 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Add Flight</h1>
+        <form method="post" action="/flight/save" onsubmit="submitForm(event)">
+            <label for="fName">Flight Name:</label>
+            <input type="text" id="fName" name="fName" required>
+            <label for="dAirport">Departure Airport:</label>
+            <input type="text" id="dAirport" name="dAirport" required>
+            <label for="aAirport">Arrival Airport:</label>
+            <input type="text" id="aAirport" name="aAirport" required>
+            <label for="dTime">Departure Time:</label>
+            <input type="datetime-local" id="dTime" name="dTime" required>
+            <label for="aTime">Arrival Time:</label>
+            <input type="datetime-local" id="aTime" name="aTime" required>
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" required>
+            <input type="submit" value="Save">
+        </form>
+    </div>
+
+    <script>
+        function submitForm(event) {
+            event.preventDefault();
+
+            const fName = document.getElementById('fName').value;
+            const dAirport = document.getElementById('dAirport').value;
+            const aAirport = document.getElementById('aAirport').value;
+            const dTime = document.getElementById('dTime').value;
+            const aTime = document.getElementById('aTime').value;
+            const amount = document.getElementById('amount').value;
+
+            const formData = new FormData();
+            formData.append('fName', fName);
+            formData.append('dAirport', dAirport);
+            formData.append('aAirport', aAirport);
+            formData.append('dTime', dTime);
+            formData.append('aTime', aTime);
+            formData.append('amount', amount);
+
+            fetch('/flight/save', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = '/flight/success';
+                } else {
+                    console.log('Error occurred during form submission');
+                }
+            })
+            .catch(error => {
+                console.log('Error occurred during form submission');
+            });
+        }
+    </script>
+</body>
+</html>

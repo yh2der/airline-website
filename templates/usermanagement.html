@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: rgb(229, 214, 175);
+            max-height: 700px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+        
+        .table-container {
+            display: flex;
+            height: 80vh;            
+        }
+
+        table {
+            width: 100%;
+            flex: 2;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            margin-right: 10px;
+            position: sticky;
+            top: 0;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: rgb(226, 169, 35);
+            color: #fff;
+            position: sticky;
+            top: 0;
+        }
+
+        tr {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: rgb(234, 191, 91);
+            cursor: pointer;
+        }
+
+        .button1,
+        .button2 {
+            display: inline-block;
+            padding: 8px 16px;
+            text-decoration: none;
+            background-color: rgb(226, 169, 35);
+            color: #fff;
+            border-radius: 4px;
+        }
+
+        .button2 {
+            background-color: #f7020a
+        }
+
+        .button1 {
+            background-color: #4CAF50
+        }
+
+        .button1:hover {
+            background-color: #387e3a;
+        }
+        .button2:hover {
+            background-color: #a32c24;
+        }
+        .log-container {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            background-color: #f2f2f2;
+            height: 100%;
+        }
+
+        .log-label {
+            padding: 10px;
+            background-color: #e5e5e5;
+            font-weight: bold;
+            background-color: rgb(226, 169, 35);
+        }
+
+        .log-content {
+            max-height: calc(100% - 40px);
+            overflow-y: scroll;
+            padding: 10px;
+        }
+
+        .log-content pre {
+            font-family: Consolas, Monaco, monospace;
+            font-size: 14px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        .trace-mode {
+            flex: 1;
+        }
+    </style>
+    <script>
+        function displayTraceCode() {
+            var traceCodeElement = document.getElementById('trace-code');
+            var traceCode = "{{ trace_code }}"; // Replace with your tracking code variable
+            traceCodeElement.textContent = traceCode;
+        }
+    </script>
+</head>
+<body onload="displayTraceCode()">
+    <h1>User Management</h1>
+
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Sex</th>
+                    <th>Phone</th>
+                    <th>Referrence</th>
+                    <th>Join Date</th>
+                    <th>account</th>
+                    <th>password</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.mId }}</td>
+                        <td>{{ user.mName }}</td>
+                        <td>{{ user.Email }}</td>
+                        <td>{{ user.Sex }}</td>
+                        <td>{{ user.mNumber }}</td>
+                        <td>{{ user.referrerId }}</td>
+                        <td>{{ user.registrationDate }}</td>
+                        <td>{{ user.account }}</td>
+                        <td>{{ user.password }}</td>
+                        <td>{{ user.role }}</td>
+                        <td>
+                            <a href="/admin/{{ user.mId }}/edituser" class="button1">Edit</a>
+                            <a href="/admin/{{ user.mId }}/deleteuser" class="button2">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="trace-mode">
+            <div class="log-container" style="height: 400px;">
+                <div class="log-label">Trace Block</div>
+                <div class="log-content" style="max-height: 80%;">
+                    <pre>{{ log_content }}</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var logContainer = $(".log-content");
+            var isRequestInProgress = false;
+
+            updateLogContent();
+
+            setInterval(function() {
+                if (!isRequestInProgress) {
+                    updateLogContent();
+                }
+            }, 1000);
+
+            function updateLogContent() {
+                isRequestInProgress = true;
+
+                $.ajax({
+                    url: "/get_log_content",
+                    type: "GET",
+                    success: function(response) {
+                        $(".log-content").find("pre").text(response.log_content);
+                        scrollToBottom();
+                        isRequestInProgress = false;
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(error);
+                        isRequestInProgress = false;
+                    }
+                });
+            }
+
+            function scrollToBottom() {
+                logContainer.scrollTop(logContainer[0].scrollHeight);
+            }
+        });
+    </script>
+</body>
+</html>

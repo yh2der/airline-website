@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Member</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: rgb(229, 214, 175);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .form-container {
+            width: 400px;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 4px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .form-group textarea {
+            height: 100px;
+        }
+
+        .form-group button {
+            padding: 8px 16px;
+            background-color: rgb(226, 169, 35);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #387e3a;
+        }
+    </style>
+</head>
+<body>
+    <h1>Edit Member</h1>
+
+    <div class="form-container">
+        <form method='post' action = '/admin/edituser/save'>
+            <div class="form-group">
+                <label for="ID">ID:</label>
+                <input type="text" id="ID" name="ID" value="{{ user.mId }}" required>
+            </div>
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" value="{{ user.mName }}" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" value="{{ user.Email }}" required>
+            </div>
+            <div class="form-group">
+                <label for="sex">Sex:</label>
+                <select id="sex" name="sex" required>
+                    <option value="M" {% if user.Sex == 'M' %}selected{% endif %}>Male</option>
+                    <option value="F" {% if user.Sex == 'F' %}selected{% endif %}>Female</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone:</label>
+                <input type="text" id="phone" name="phone" value="{{ user.mNumber }}" required>
+            </div>
+            <div class="form-group">
+                <label for="referrer">Referrer:</label>
+                <input type="text" id="referrer" name="referrer" value="{{ user.referrerId }}" required>
+            </div>
+            <div class="form-group">
+                <label for="join-date">Join Date:</label>
+                <input type="text" id="join-date" name="join-date" value="{{ user.registrationDate }}" required>
+            </div>
+            <div class="form-group">
+                <label for="account">Account:</label>
+                <input type="text" id="account" name="account" value="{{ user.account }}" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="text" id="password" name="password" value="{{ user.password }}" required>
+            </div>
+            <div class="form-group">
+                <label for="role">Role:</label>
+                <select id="role" name="role" required>
+                    <option value="Admin" {% if user.role == 'Admin' %}selected{% endif %}>Admin</option>
+                    <option value="Member" {% if user.role == 'Member' %}selected{% endif %}>Member</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <button type="submit">Save</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

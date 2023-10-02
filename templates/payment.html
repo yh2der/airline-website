@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: rgb(229, 214, 175);
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: rgb(226, 169, 35);
+        }
+
+        td {
+            background-color: rgb(253, 249, 240);
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .button-container a,
+        .button-container button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .button-container button.cancel {
+            background-color: #f44336;
+            margin-left: 10px;
+            border:None;
+        }
+
+        .button-container a:hover {
+            background-color: #387e3a;
+        }
+        .button-container button:hover{
+            background-color: #a32c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Payment Details</h1>
+        
+    
+            <table>
+                <tr>
+                    <th>Order Number:</th>
+                    <td>{{ payment.oNo }}</td>
+                </tr>
+                <tr>
+                    <th>Amount:</th>
+                    <td>{{ payment.amount }}</td>
+                </tr>
+                <tr>
+                    <th>Payment Method:</th>
+                    <td>{{ payment.paymethod }}</td>
+                </tr>
+                <tr>
+                    <th>Bank Account:</th>
+                    <td>{{ bank_account }}</td>
+                </tr>
+            </table>
+        <div class="button-container">
+            <a href="/payment/{{ payment.mId }}/thanks">Paid</a>
+            <button type="button" class="cancel" onclick="window.history.back()">Cancel</button>
+        </div>
+    </div>
+</body>
+</html>

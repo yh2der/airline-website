@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Order</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: rgb(229, 214, 175);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .form-container {
+            width: 400px;
+            margin: 0 auto;
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 4px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .form-group textarea {
+            height: 100px;
+        }
+
+        .form-group button {
+            padding: 8px 16px;
+            background-color: rgb(226, 169, 35);
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-group button:hover {
+            background-color: #387e3a;
+        }
+    </style>
+</head>
+<body>
+    <h1>Edit Order</h1>
+
+    <div class="form-container">
+        <form method="post" action="/admin/editorder/save">
+            <div class="form-group">
+                <label for="order-id">Order ID:</label>
+                <input type="text" id="order-id" name="order-id" value="O003" required>
+            </div>
+            <div class="form-group">
+                <label for="payment-method">Payment Method:</label>
+                <input type="text" id="payment-method" name="payment-method" value="Cash" required>
+            </div>
+            <div class="form-group">
+                <label for="amount">Amount:</label>
+                <input type="text" id="amount" name="amount" value="420" required>
+            </div>
+            <div class="form-group">
+                <label for="status">Status:</label>
+                <select id="status" name="status" required>
+                    <option value="Pending" selected>Pending</option>
+                    <option value="Confirmed">Confirmed</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="order-date">Order Date:</label>
+                <input type="text" id="order-date" name="order-date" value="2023-06-03" required>
+            </div>
+            <div class="form-group">
+                <label for="member-id">Member ID:</label>
+                <input type="text" id="member-id" name="member-id" value="M003" required>
+            </div>
+            <div class="form-group">
+                <label for="flight-id">Flight ID:</label>
+                <input type="text" id="flight-id" name="flight-id" value="F003" required>
+            </div>
+            <div class="form-group">
+                <label for="airline">Airline:</label>
+                <input type="text" id="airline" name="airline" value="Airline Z" required>
+            </div>
+            <div class="form-group">
+                <label for="passenger-name">Passenger Name:</label>
+                <input type="text" id="passenger-name" name="passenger-name" value="John Doe" required>
+            </div>
+            <div class="form-group">
+                <label for="departure-date">Departure Date:</label>
+                <input type="text" id="departure-date" name="departure-date" value="2023-06-15" required>
+            </div>
+            <div class="form-group">
+                <label for="arrival-date">Arrival Date:</label>
+                <input type="text" id="arrival-date" name="arrival-date" value="2023-06-20" required>
+            </div>
+            <div class="form-group">
+                <label for="origin">Origin:</label>
+                <input type="text" id="origin" name="origin" value="City A" required>
+            </div>
+            <div class="form-group">
+                <label for="destination">Destination:</label>
+                <input type="text" id="destination" name="destination" value="City B" required>
+            </div>
+            <div class="form-group">
+                <label for="seat-number">Seat Number:</label>
+                <input type="text" id="seat-number" name="seat-number" value="12A" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

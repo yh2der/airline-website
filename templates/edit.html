@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Flight</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+            background-color: rgb(229, 214, 175);
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 40px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="datetime-local"],
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            margin: 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Edit Flight</h1>
+        <form method="post" action="/flight/{{ flight.fId }}/update">
+            <div class="form-group">
+                <label for="fName">Flight Name:</label>
+                <input type="text" id="fName" name="fName" class="form-control" value="{{ flight.fName }}" required>
+            </div>
+            <div class="form-group">
+                <label for="dAirport">Departure Airport:</label>
+                <input type="text" id="dAirport" name="dAirport" class="form-control" value="{{ flight.dAirport }}" required>
+            </div>
+            <div class="form-group">
+                <label for="aAirport">Arrival Airport:</label>
+                <input type="text" id="aAirport" name="aAirport" class="form-control" value="{{ flight.aAirport }}" required>
+            </div>
+            <div class="form-group">
+                <label for="dTime">Departure Time:</label>
+                <input type="datetime-local" id="dTime" name="dTime" class="form-control" value="{{ flight.dTime }}" required>
+            </div>
+            <div class="form-group">
+                <label for="aTime">Arrival Time:</label>
+                <input type="datetime-local" id="aTime" name="aTime" class="form-control" value="{{ flight.aTime }}" required>
+            </div>
+            <div class="form-group">
+                <label for="amount">Amount:</label>
+                <input type="number" id="amount" name="amount" class="form-control" value="{{ flight.amount }}" required>
+            </div>
+            <input type="submit" value="Update" class="btn btn-primary">
+        </form>
+    </div>
+</body>
+</html>

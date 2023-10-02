@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flight List - Admin</title>
+    <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        background-color: rgb(229, 214, 175);
+        max-height: 700px;
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    .container {
+        display: flex;
+        height: 80vh;
+    }
+
+    .flight-info {
+        flex: 2;
+        margin-right: 10px;
+        overflow-y: scroll;
+        position: sticky;
+        top: 0;
+    }
+
+    .trace-mode {
+        flex: 1;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+
+    .table-header {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        background-color: rgb(226, 169, 35);
+    }
+
+    .table-body {
+        max-height: calc(80vh - 50px);
+        overflow-y: scroll;
+    }
+
+    th {
+        background-color: rgb(226, 169, 35)
+    }
+
+    tr {
+        background-color: #f9f9f9;
+    }
+
+    tr:hover {
+        background-color: rgb(234, 191, 91);
+        cursor: pointer;
+    }
+
+    .logout {
+        text-align: right;
+        margin-top: 20px;
+    }
+
+    .edit-btn, .delete-btn {
+        display: inline-block;
+        padding: 5px 10px;
+        margin-left: 5px;
+        text-decoration: none;
+        background-color: #4CAF50;
+        color: #fff;
+        border-radius: 3px;
+    }
+
+    .delete-btn {
+        background-color: #f44336;
+    }
+    .delete-btn:hover {
+        background-color: #a32c24;
+    }
+    .edit-btn:hover {
+        background-color: #387e3a;
+    }
+
+    .add-btn {
+        display: inline-block;
+        padding: 3px 6px;
+        margin-top: 10px;
+        font-size: 16px;
+        text-decoration: none;
+        background-color: #2196F3;
+        color: #fff;
+        border-radius: 3px;
+    }
+
+    .add-btn:hover {
+        background-color: #196eb4;
+    }
+
+    .log-container {
+        margin-top: 20px;
+        border: 1px solid #ccc;
+        background-color: #f2f2f2;
+        height: 100%;
+    }
+
+    .log-label {
+        padding: 10px;
+        background-color: #e5e5e5;
+        font-weight: bold;
+        background-color: rgb(226, 169, 35)
+    }
+
+    .log-content {
+        max-height: calc(100% - 40px);
+        overflow-y: scroll;
+        padding: 10px;
+    }
+
+    .log-content pre {
+        font-family: Consolas, Monaco, monospace;
+        font-size: 14px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+
+    .logout {
+        text-align: right;
+        margin-top: 20px;
+    }
+
+    .logout-btn {
+        display: inline-block;
+        padding: 5px 10px;
+        margin-left: 5px;
+        text-decoration: none;
+        background-color: #f7020a;
+        color: #fff;
+        border-radius: 3px;
+        transition: background-color 0.3s ease;
+    }
+
+    .logout-btn:hover {
+        background-color: #920308;
+    }
+
+    .statistics-btn {
+        display: inline-block;
+        padding: 5px 10px;
+        margin-right: 5px;
+        text-decoration: none;
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 3px;
+    }
+    .statistics-btn:hover{
+        background-color: #0251a5;
+    }
+
+    </style>
+
+    <script>
+        function displayTraceCode() {
+            var traceCodeElement = document.getElementById('trace-code');
+            var traceCode = "{{ trace_code }}"; // Replace with your tracking code variable
+            traceCodeElement.textContent = traceCode;
+        }
+    </script>
+</head>
+<body onload="displayTraceCode()">
+    <h1>Welcome, {{ username }}!</h1>
+    
+
+    
+    <div class="logout">
+        <a class="statistics-btn" href="/allorders">All Orders</a>
+        <a class ="statistics-btn" href="/usermanagement">User Management</a>
+        <a class="statistics-btn" href="/statistics">Statistics</a>
+        <a class="logout-btn" href="/logout">Logout</a>
+    </div>    
+
+    <h2>Flight List
+        <a class="add-btn" href="/flight/add">Add New Flight</a>
+    </h2>
+    <div class="container">
+        
+        <div class="flight-info">
+            <table>
+                <tr class="table-header">
+                    <th>ICON</th>
+                    <th>Flight ID</th>
+                    <th>Flight Name</th>
+                    <th>Departure Airport</th>
+                    <th>Arrival Airport</th>
+                    <th>Departure Time</th>
+                    <th>Arrival Time</th>
+                    <th>Amount</th>
+                    <th>Actions</th>
+                </tr>
+                <tbody class="table-body">
+                    {% for flight in flights %}
+                    <tr>
+                        <td><img src="/static/airline{{ loop.index }}.jpg" alt="Airline Logo" width="50"></td>
+                        <td>{{ flight.fId }}</td>
+                        <td>{{ flight.fName }}</td>
+                        <td>{{ flight.dAirport }}</td>
+                        <td>{{ flight.aAirport }}</td>
+                        <td>{{ flight.dTime }}</td>
+                        <td>{{ flight.aTime }}</td>
+                        <td>{{ flight.amount }}</td>
+                        <td>
+                            <a class="edit-btn" href="/flight/{{ flight.fId }}/edit">Edit</a>
+                            <a class="delete-btn" href="/flight/{{ flight.fId }}/delete">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        
+        <div class="trace-mode">
+            <div class="log-container" style="height: 400px;">
+                <div class="log-label">Trace Block</div>
+                <div class="log-content" style="max-height: 80%;">
+                    <pre>{{ log_content }}</pre>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // 获取日志容器元素
+        var logContainer = $(".log-content");
+        // 判断请求是否正在进行中
+        var isRequestInProgress = false;
+
+        // 初始化时更新日志内容
+        updateLogContent();
+
+        // 定时器，每隔1秒检查是否需要更新日志内容
+        setInterval(function() {
+            if (!isRequestInProgress) {
+                updateLogContent();
+            }
+        }, 1000);
+
+        // 更新日志内容的函数
+        function updateLogContent() {
+            // 将请求状态设为进行中，避免重复发送请求
+            isRequestInProgress = true;
+
+            // 发送Ajax请求，获取日志内容
+            $.ajax({
+                url: "/get_log_content", // 请求的URL地址
+                type: "GET", // 请求方法为GET
+                success: function(response) {
+                    // 更新日志内容到相应的元素
+                    $(".log-content").find("pre").text(response.log_content);
+                    // 滚动到日志内容底部
+                    scrollToBottom();
+                    // 将请求状态设为完成
+                    isRequestInProgress = false;
+                },
+                error: function(xhr, status, error) {
+                    console.log(error);
+                    // 将请求状态设为完成
+                    isRequestInProgress = false;
+                }
+            });
+        }
+
+        // 将日志容器滚动到底部的函数
+        function scrollToBottom() {
+            logContainer.scrollTop(logContainer[0].scrollHeight);
+        }
+    });
+</script>
+
+</body>
+</html>
