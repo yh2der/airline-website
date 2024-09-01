@@ -3,24 +3,65 @@
 ## Introduction
 This project, "Airline Web," serves as a hands-on learning experience in database management and web development. The website is built using Flask, a lightweight web framework in Python, and is integrated with Microsoft SQL Server for the database backend. Through this project, I aim to demonstrate and apply the concepts and techniques I've learned during my studies of databases.
 
-## 使用者模式
+## Installation and Setup
+1. **Download and Install Python**:
+   - [Download Python](https://www.python.org/downloads/) from the official website.
+   - Follow the instructions to install Python on your system.
+   - Ensure that `pip` is also installed. You can verify this by running the following command in your terminal:
+    ```bash
+    python -m pip --version
+    ```
+   - Install the required Python packages by running:
+    ```bash
+    pip install flask pyodbc
+    ```
 
-使用者模式允許訪問者完成以下操作：
+2. **Download and Install Microsoft SQL Server Developer Edition**:
+    - [Download Microsoft SQL Server Developer Edition](https://www.microsoft.com/zh-tw/sql-server/sql-server-downloads) from the official Microsoft website.
+    - Follow the setup instructions to install SQL Server on your machine.
+    - After finished installation of SQL server, click the button below, install SQL Server Management Studio (SSMS) to manage your database with a graphical interface.
 
-- **搜尋航班**：使用者可以輸入出發地、目的地、出發日期等信息，以查找適合的航班選項。
-- **選擇航班**：使用者可以查看可用的航班列表，並選擇他們想要的選項。
-- **訂購機票**：使用者可以將所選機票添加到購物車，然後進行結帳。
-- **結帳**：使用者可以提供必要的個人信息和付款信息，然後確認訂單。
-- **查看訂單**：使用者可以查看他們以前的訂單記錄，包括訂單詳細信息和付款狀態。
+3. **Checking and connecting**
+    - Open Sql Server Configuration Manager to check if server is activating
+    ![alt text](Pictures/image.png)
+    - Open SSMS to connect to database
+    ![alt text](Pictures/image-1.png)
+    - Insert the database I provided in this repo(you can extract files to "Microsoft SQL Server\MSSQLXX.<InstanceName>\MSSQL\DATA" at first, you will easily find it)
+    ![alt text](Pictures/image-2.png)
+    ![alt text](Pictures/image-3.png)
 
-## 管理者模式
+## Usage
+1. Run the Application:
+   - Execute `app.py` to start the web application.
+   
+2. Sign In:
+   - You can sign in using one of the following modes:
+   
+    **User Mode:**
+    - Account: `mia`
+    - Password: `mia`
+    
+    **Admin Mode:**
+    - Account: `admin`
+    - Password: `admin`
 
-管理者模式允許特權用戶執行以下操作：
+## Features
+### User Mode
+The User Mode allows visitors to perform the following actions:
 
-- **管理航班信息**：管理者可以添加、編輯或刪除航班信息，包括航班號、日期、時間、座位數量等。
-- **查看訂單**：管理者可以查看所有訂單，包括用戶的個人信息、訂單狀態和付款信息。
-- **處理訂單**：管理者可以更新訂單的狀態，例如確認付款、發送電子機票等。
-- **管理用戶**：管理者可以查看和管理用戶帳戶，包括添加或刪除用戶，重置密碼，以及查看用戶訂單記錄。
+- **Search Flights**: Users can enter information such as departure city, destination, departure date, etc., to find suitable flight options.
+- **Select Flights**: Users can view a list of available flights and choose the options they prefer.
+- **Book Tickets**: Users can add selected tickets to their cart and proceed to checkout.
+- **Checkout**: Users can provide necessary personal and payment information to confirm their orders.
+- **View Orders**: Users can view their past order history, including order details and payment status.
 
-## Preparation
-- [Download Microsoft SQL Server Express Edition](https://www.microsoft.com/zh-tw/sql-server/sql-server-downloads)
+### Admin Mode
+The Admin Mode allows privileged users to perform the following actions:
+
+- **Manage Flight Information**: Admins can add, edit, or delete flight information, including flight numbers, dates, times, seat availability, etc.
+- **View Orders**: Admins can view all orders, including user information, order status, and payment details.
+- **Process Orders**: Admins can update the status of orders, such as confirming payment, sending e-tickets, etc.
+- **Manage Users**: Admins can view and manage user accounts, including adding or removing users, resetting passwords, and viewing user order history.
+
+### Demo Viedo
+[Demo](https://youtu.be/yrakHqfjz24)
