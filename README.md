@@ -1,6 +1,7 @@
-# AirlineWeb
+# Airline Web
 
-訂機票網站是一個線上平台，旨在讓使用者輕鬆訂購航班機票，並讓管理者有效地管理訂單和航班信息。這個應用程序具有兩種主要用戶模式：使用者和管理者。
+## Introduction
+This project, "Airline Web," serves as a hands-on learning experience in database management and web development. The website is built using Flask, a lightweight web framework in Python, and is integrated with Microsoft SQL Server for the database backend. Through this project, I aim to demonstrate and apply the concepts and techniques I've learned during my studies of databases.
 
 ## 使用者模式
 
@@ -20,3 +21,6 @@
 - **查看訂單**：管理者可以查看所有訂單，包括用戶的個人信息、訂單狀態和付款信息。
 - **處理訂單**：管理者可以更新訂單的狀態，例如確認付款、發送電子機票等。
 - **管理用戶**：管理者可以查看和管理用戶帳戶，包括添加或刪除用戶，重置密碼，以及查看用戶訂單記錄。
+
+## Preparation
+- [Download Microsoft SQL Server Express Edition](https://www.microsoft.com/zh-tw/sql-server/sql-server-downloads)

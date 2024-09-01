@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 # 設定日誌處理程序
-handler = logging.FileHandler('history.log')
+handler = logging.FileHandler('LogFile/history.log')
 handler.setLevel(logging.INFO)
 
 # 設定日誌訊息格式
@@ -26,7 +26,7 @@ logger.addHandler(handler)
 def create_connection():
     conn = pyodbc.connect(
         "Driver={SQL Server};"
-        "Server=DESKTOP-6V6FMVO;"
+        "Server=DESKTOP-7GLRS7Q;"
         "Database=airlineWeb;"
         "Trusted_Connection=yes;"
     )
@@ -38,7 +38,6 @@ def generate_bank_account():
         '001': 'Bank A',
         '002': 'Bank B',
         '003': 'Bank C',
-        # 添加更多银行代码和名称
     }
     bank_code, bank_name = random.choice(list(banks.items()))
     bank_account_number = ''.join(random.choices('0123456789', k=10))
@@ -48,7 +47,7 @@ def generate_bank_account():
 
 @app.route('/get_log_content', methods=['GET'])
 def get_log_content():
-    log_path = 'C:/Users/yh2de/OneDrive/桌面/AirlineWeb/history.log'  # 請替換為您的日誌檔案路徑
+    log_path = 'C:/Users/user/Desktop/CodeProjects/AirlineWeb/LogFile/history.log'  # 請替換為您的日誌檔案路徑
 
     with open(log_path, 'r') as file:
         log_content = file.read()
@@ -149,13 +148,11 @@ def admin():
     if 'user' not in session:
         return redirect('/')
     
-    log_path = 'C:/Users/yh2de/OneDrive/桌面/AirlineWeb/history.log'  # 請替換為您的日誌檔案路徑
-
+    log_path = 'C:/Users/user/Desktop/CodeProjects/AirlineWeb/LogFile/history.log'  # 請替換為您的日誌檔案路徑
 
     with open(log_path, 'r') as file:
         log_content = file.read()
         # log_content = ''.join(log_lines[-10:])
-
 
     # 從 session 中獲取使用者資訊
     user = session['user']
